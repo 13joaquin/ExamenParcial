@@ -1,118 +1,115 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { useState } from 'react';
+import { Image, SafeAreaView, StyleSheet, Text, View, FlatList, Pressable, } from 'react-native';
+import FormularioPro from './src/componente/Fproducto';
+import Producto from './src/componente/producto';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App = () => {
+  const[modalVProduto, setModalVProducto] = useState(false);
+  const[producto, setProducto] = useState([]);
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <SafeAreaView style={AppStyle.container}>
+      <View style={AppStyle.rowContainer}>
+      <Image 
+      style={AppStyle.imagenLogo}
+      source={require('./images/LOGO-LA-TORRE.png')}/>
+      <Text style={AppStyle.Title1}>
+        Registros de Productos</Text>
+      </View>
+      <View>
+      <Text style={AppStyle.Title2}>Productos</Text>
+      <Pressable style = {AppStyle.btnNewProducto} 
+      onPress={() => setModalVProducto(!modalVProduto)}>
+        <Text style = {AppStyle.btnTxtNewEstudiantes}>Nuevos Productos</Text>
+      </Pressable> 
+      <Pressable
+      style = {AppStyle.btnNewProducto}
+      onPress={() => setModalVProducto(!modalVProduto)}>
+        <Text> RRRRRRRR</Text>
+      </Pressable>
+      </View>
+      
+      {producto.length === 0?(
+        <Text style={AppStyle.NoEstudiantes}> Noo hay Estudiantes</Text>
+      ):(
+        <FlatList
+        style={AppStyle.listado}
+          data={producto}
+          keyExtractor={ item => item.id}
+          renderItem={({item})=>{
+            return(
+              <Producto
+                item = {item}
+              />
+         )
+        }}
+        />)
+     
+    }
+    <FormularioPro
+      modalVProducto = {modalVProduto}
+      setModaVProducto = {setModalVProducto}
+      producto = {producto}
+      setProducto= {setProducto}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
     </SafeAreaView>
   );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+};
+const AppStyle = StyleSheet.create({
+  container:{
+    backgroundColor: '#7c32af',
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  imagenLogo:{
+    borderRadius: 100,
+    width: 100,
+    height: 100,
+    marginRight: 10,
   },
-  highlight: {
-    fontWeight: '700',
+  Title1: {
+    textAlign: 'center',
+    fontSize: 50,
+    color: '#',
+    fontWeight: '900',
   },
+ Title2: {
+  textAlign: 'left',
+  fontSize: 25,
+  fontWeight: '900',
+  color: '#',
+ },
+ btnNewProducto:{
+  backgroundColor: '#4234ca',
+  padding: 20,
+  marginTop: 25,
+  marginHorizontal: 20,
+  borderRadius: 10,
+},
+btnTxtNewEstudiantes:{
+  textAlign: 'center',
+  color: '#090a0a',
+  fontSize: 19,
+  fontWeight: '900',
+  textTransform: 'uppercase'
+},
+NoEstudiantes:{
+  marginTop: 40,
+  textAlign: 'center',
+  fontSize: 24,
+  fontWeight: '600',
+},
+listado:{
+  marginTop: 50,
+  marginHorizontal: 30,
+},
 });
-
 export default App;
