@@ -1,5 +1,5 @@
-import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react'
+import { Pressable, StyleSheet, Text, View, Modal } from 'react-native';
 
 const producto = ({item}) => {
     console.log(item );

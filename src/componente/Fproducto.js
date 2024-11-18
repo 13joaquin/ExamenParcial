@@ -12,9 +12,9 @@ import { Alert,
 import Producto from './producto';
 import DatePicker from 'react-native-date-picker';
 
-const Fproducto = (modalVProduto, setModalVProducto, producto, setProducto) => {
+const Fproducto = ({modalProdcuto, setModalProducto, producto, setProducto}) => {
     const [noproducto, setNoProducto] = useState('');
-    const [esnombre, setEsNombre] = useState('');
+    const [esnombre, setENombre] = useState('');
     const [noSerie, setnoSerie] = useState('');
     const [bodega, setBodega] = useState('');
     const [proEstado, setproEstado] = useState('');
@@ -39,9 +39,9 @@ const Fproducto = (modalVProduto, setModalVProducto, producto, setProducto) => {
         console.log(nuevoProduto);
         
         setProducto([...producto, nuevoProduto]);
-        setModalVProducto(!modalVProduto);
+        setModalProducto(!modalProdcuto);
         setNoProducto('');
-        setEsCarnet('');
+        setENombre('');
         setnoSerie('');
         setBodega('');
         setproEstado('');
@@ -49,13 +49,13 @@ const Fproducto = (modalVProduto, setModalVProducto, producto, setProducto) => {
 
     };
     return (
-        <Modal animationType='slide' visible={modalVProduto}>
+        <Modal animationType='slide' visible={modalProdcuto}>
         <SafeAreaView style = {style.contenido}>
             <ScrollView>
                 <Text>Desde la ventana de Modal</Text>
                 <Pressable 
                 style = {style.btnCancelar} 
-                onPress={() => setModalVProducto(!modalVProduto)}>
+                onPress={() => setModalProducto(false)}>
                         <Text style = {style.btnTxTCancelar}>Regresar</Text>
                 </Pressable>
                 <View style={style.campo}>
@@ -75,7 +75,7 @@ const Fproducto = (modalVProduto, setModalVProducto, producto, setProducto) => {
                         placeholder="Nombre del Producto"
                         placeholderTextColor={'#666'}
                         value={esnombre}
-                        onChangeText={setEsNombre}
+                        onChangeText={setENombre}
                     />
                 </View>
                 <View style={style.campo}>

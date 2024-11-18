@@ -5,9 +5,8 @@ import FormularioPro from './src/componente/Fproducto';
 import Producto from './src/componente/producto';
 
 const App = () => {
-  const[modalVProduto, setModalVProducto] = useState(false);
+  const [modalProducto, setModalProducto] = useState(false);
   const[producto, setProducto] = useState([]);
-
 
   return (
     <SafeAreaView style={AppStyle.container}>
@@ -21,16 +20,11 @@ const App = () => {
       <View>
       <Text style={AppStyle.Title2}>Productos</Text>
       <Pressable style = {AppStyle.btnNewProducto} 
-      onPress={() => setModalVProducto(!modalVProduto)}>
+      onPress={()=> setModalProducto(!modalProducto)}>
         <Text style = {AppStyle.btnTxtNewEstudiantes}>Nuevos Productos</Text>
       </Pressable> 
-      <Pressable
-      style = {AppStyle.btnNewProducto}
-      onPress={() => setModalVProducto(!modalVProduto)}>
-        <Text> RRRRRRRR</Text>
-      </Pressable>
       </View>
-      
+    
       {producto.length === 0?(
         <Text style={AppStyle.NoEstudiantes}> Noo hay Estudiantes</Text>
       ):(
@@ -49,8 +43,8 @@ const App = () => {
      
     }
     <FormularioPro
-      modalVProducto = {modalVProduto}
-      setModaVProducto = {setModalVProducto}
+      modalProdcuto = {modalProducto}
+      setModalProducto = {setModalProducto}
       producto = {producto}
       setProducto= {setProducto}
       />
